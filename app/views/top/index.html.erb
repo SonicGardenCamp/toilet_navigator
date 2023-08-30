@@ -16,12 +16,12 @@ function initMap(){
   geocoder = new google.maps.Geocoder()
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 40.7828, lng:-73.9653},
+    center: {lat: <%= @toilet_place.latitude %>, lng:  <%= @toilet_place.longitude %>},
     zoom: 12,
   });
-  const image = "https://resizer2.myct.jp/img/91668476054/toilet.png";
+  const image = "<%= asset_path('toilet.png') %>";
   marker = new google.maps.Marker({
-    position:  {lat: 40.7828, lng:-73.9653},
+    position:  {lat: <%= @toilet_place.latitude %>, lng: <%= @toilet_place.longitude %>},
     map: map,
     icon: image,
   });
