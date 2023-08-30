@@ -17,6 +17,7 @@ gem "sentry-ruby", "~> 5.10"
 gem "sentry-rails", "~> 5.10"
 gem "devise"
 gem "dotenv-rails"
+gem "simple_form"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
