@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_074132) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_060539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "toilet_places", force: :cascade do |t|
+    t.string "address", null: false
+    t.float "longitude", null: false
+    t.float "latitude", null: false
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_toilet_places_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -32,4 +43,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_074132) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "toilet_places", "users"
 end
