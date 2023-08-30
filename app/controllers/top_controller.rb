@@ -1,5 +1,5 @@
 class TopController < ApplicationController
   def index
-    @toilet_place = ToiletPlace.first
+    @toilet_places = ToiletPlace.all
   end
 end

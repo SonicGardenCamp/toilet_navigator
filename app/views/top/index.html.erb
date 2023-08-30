@@ -9,22 +9,36 @@
 }
 </style>
 
+<!-- app/views/some_view.html.erb -->
 <script>
 let map
+let marker
 
 function initMap(){
-  geocoder = new google.maps.Geocoder()
+  const toiletPlaces = [
+    <% @toilet_places.each do |toilet_place| %>
+      {
+        lat: <%= toilet_place.latitude %>,
+        lng: <%= toilet_place.longitude %>
+      },
+    <% end %>
+  ];
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: <%= @toilet_place.latitude %>, lng:  <%= @toilet_place.longitude %>},
+    center: { lat: toiletPlaces[0].lat, lng: toiletPlaces[0].lng },
     zoom: 12,
   });
+
   const image = "<%= asset_path('toilet.png') %>";
-  marker = new google.maps.Marker({
-    position:  {lat: <%= @toilet_place.latitude %>, lng: <%= @toilet_place.longitude %>},
-    map: map,
-    icon: image,
+
+  toiletPlaces.forEach(place => {
+    marker = new google.maps.Marker({
+      position: { lat: place.lat, lng: place.lng },
+      map: map,
+      icon: image,
+    });
   });
 }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
