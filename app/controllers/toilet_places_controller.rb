@@ -1,5 +1,10 @@
 class ToiletPlacesController < ApplicationController
-  before_action :set_toilet_place, only: %i[edit update destroy]
+  before_action :set_toilet_place, only: %i[show edit update destroy]
+  
+  def show
+    @review  = current_user.reviews.build
+    @reviews = Review.default_order
+  end
   
   def new
     @toilet_place = ToiletPlace.new

@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_060539) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_31_050334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content", null: false
+    t.bigint "user_id", null: false
+    t.bigint "toilet_place_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["toilet_place_id"], name: "index_reviews_on_toilet_place_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
 
   create_table "toilet_places", force: :cascade do |t|
     t.string "address", null: false
@@ -43,5 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_060539) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reviews", "toilet_places"
+  add_foreign_key "reviews", "users"
   add_foreign_key "toilet_places", "users"
 end
