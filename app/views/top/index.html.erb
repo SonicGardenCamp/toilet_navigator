@@ -10,11 +10,11 @@
 
 <!-- app/views/some_view.html.erb -->
 <script>
-let map
-let marker
-
-function initMap(){
+let map;
+let markers = [];
+function initMap() {
   const toiletPlaces = [
+    // この部分はRailsからデータを取得
     <% @toilet_places.each do |toilet_place| %>
       {
         lat: <%= toilet_place.latitude %>,
@@ -22,36 +22,52 @@ function initMap(){
       },
     <% end %>
   ];
-
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: toiletPlaces[0].lat, lng: toiletPlaces[0].lng },
     zoom: 12,
   });
-
   const image = "<%= asset_path('toilet.png') %>";
-
   toiletPlaces.forEach(place => {
-    marker = new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: { lat: place.lat, lng: place.lng },
       map: map,
       icon: image,
     });
+    markers.push(marker);
   });
-  
-  // 現在地を取得
-  navigator.geolocation.getCurrentPosition(function (position) {
-  const LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-  
-  // マップの中心に移動
-  map.setCenter(LatLng);
-  
-  // 現在地にマーカーを立てる
-    const currentLocationMarker = new google.maps.Marker({
-    map: map,
-    position: LatLng,
-  });
-
-    markers.push(currentLocationMarker);
+  const directionsService = new google.maps.DirectionsService();
+  const directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map);
+  navigator.geolocation.getCurrentPosition(function(position) {
+    const currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    map.setCenter(currentLocation);
+    const currentMarker = new google.maps.Marker({
+      position: currentLocation,
+      map: map,
+    });
+    markers.push(currentMarker);
+    // 最短距離のtoilet_placeを見つける（簡単な例）
+    let shortestDistance = Number.MAX_VALUE;
+    let closestPlace = null;
+    toiletPlaces.forEach(place => {
+      const toiletLocation = new google.maps.LatLng(place.lat, place.lng);
+      const distance = google.maps.geometry.spherical.computeDistanceBetween(currentLocation, toiletLocation);
+      if (distance < shortestDistance) {
+        shortestDistance = distance;
+        closestPlace = place;
+      }
+    });
+    // 最短距離のtoilet_placeまでのルートを取得
+    const request = {
+      origin: currentLocation,
+      destination: new google.maps.LatLng(closestPlace.lat, closestPlace.lng),
+      travelMode: 'WALKING',
+    };
+    directionsService.route(request, function(result, status) {
+      if (status === 'OK') {
+        directionsRenderer.setDirections(result);
+      }
+    });
   }, function(error) {
     console.log("Error occurred. Error code: " + error.code);
   });
