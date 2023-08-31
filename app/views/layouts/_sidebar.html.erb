@@ -21,6 +21,15 @@
           <%= link_to 'ログイン', new_user_session_path, class: "dropdown-item"%>
         <% end %>
       </ul>
+      <% toilet_places.each do |toilet_place| %>
+        <div>
+          <%= toilet_place.name %>
+          <%= toilet_place.address %>
+          <% if user_signed_in? && current_user.toilet_places.include?(toilet_place) %>
+            <%= link_to '削除', toilet_place_path(toilet_place), data: { turbo_method: :delete, turbo_confirm: '本当に削除して良いですか？' } %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
