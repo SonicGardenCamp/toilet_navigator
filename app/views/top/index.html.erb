@@ -37,6 +37,24 @@ function initMap(){
       icon: image,
     });
   });
+  
+  // 現在地を取得
+  navigator.geolocation.getCurrentPosition(function (position) {
+  const LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  
+  // マップの中心に移動
+  map.setCenter(LatLng);
+  
+  // 現在地にマーカーを立てる
+    const currentLocationMarker = new google.maps.Marker({
+    map: map,
+    position: LatLng,
+  });
+
+    markers.push(currentLocationMarker);
+  }, function(error) {
+    console.log("Error occurred. Error code: " + error.code);
+  });
 }
 </script>
 
