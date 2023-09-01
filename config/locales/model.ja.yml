@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      toilet_place:
+      review:
+    attributes:
+      toilet_place:
+        name: 名称
+        address: 住所
+      review:
+        content: レビュー内容
