@@ -2,15 +2,13 @@
 <div id='map'></div>
 
 <style>
-/* Google Mapを囲う要素 */
 #map {
   position: relative;
   width: 100%;
   height: 0;
-  padding-top: 50%; /* 比率を4:3に固定 */
+  padding-top: 50%;
 }
 
-/* Google Mapのiframe */
 #map iframe {
   position: absolute;
   width: 100%;
@@ -18,7 +16,6 @@
 }
 </style>
 
-<!-- app/views/some_view.html.erb -->
 <script>
 let map;
 let markers = [];
@@ -36,7 +33,9 @@ function initMap() {
     center: { lat: toiletPlaces[0].lat, lng: toiletPlaces[0].lng },
     zoom: 12,
   });
+  
   const image = "<%= asset_path('toilet.png') %>";
+
   toiletPlaces.forEach(place => {
     const marker = new google.maps.Marker({
       position: { lat: place.lat, lng: place.lng },
@@ -45,6 +44,7 @@ function initMap() {
     });
     markers.push(marker);
   });
+
   const directionsService = new google.maps.DirectionsService();
   const directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map);
@@ -56,6 +56,7 @@ function initMap() {
       map: map,
     });
     markers.push(currentMarker);
+    
     // 最短距離のtoilet_placeを見つける（簡単な例）
     let shortestDistance = Number.MAX_VALUE;
     let closestPlace = null;
@@ -67,6 +68,7 @@ function initMap() {
         closestPlace = place;
       }
     });
+
     // 最短距離のtoilet_placeまでのルートを取得
     const request = {
       origin: currentLocation,
