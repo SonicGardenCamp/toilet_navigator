@@ -22,11 +22,15 @@
         <% end %>
       </ul>
       <% toilet_places.each do |toilet_place| %>
-        <div>
-          <%= link_to toilet_place.name, toilet_place_path(toilet_place) %>
-          <%= toilet_place.address %>
+        <div class="border-bottom d-flex align-items-center">
+          <div>
+            <%= link_to toilet_place.name, toilet_place_path(toilet_place), class: "text-reset link-underline link-underline-opacity-0"%>
+            <p><%= toilet_place.address %></p>
+          </div>
           <% if user_signed_in? && current_user.toilet_places.include?(toilet_place) %>
-            <%= link_to '削除', toilet_place_path(toilet_place), data: { turbo_method: :delete, turbo_confirm: '本当に削除して良いですか？' } %>
+          <div class="ms-2 mt-2">
+            <%= link_to '削除', toilet_place_path(toilet_place), data: { turbo_method: :delete, turbo_confirm: '本当に削除して良いですか？' }, class: "btn btn-danger" %>
+          </div>
           <% end %>
         </div>
       <% end %>
