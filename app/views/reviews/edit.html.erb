@@ -1,6 +1,6 @@
 <div class='w-50 mx-auto mt-3'>
   <%= simple_form_for @review, url: toilet_place_review_path(@review.toilet_place.id, @review) do |f|%>
-    <%= f.input :content %>
+    <%= f.input :content, input_html: { rows: 5 } %>
     <%= f.input :toilet_place_id, as: :hidden, input_html: { value: @review.toilet_place.id } %>
     <%= f.button :submit, class: 'btn btn-primary' %>
   <% end %>
