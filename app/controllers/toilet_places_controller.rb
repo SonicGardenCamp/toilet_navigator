@@ -14,7 +14,7 @@ class ToiletPlacesController < ApplicationController
     @toilet_place = ToiletPlace.new(toilet_place_params)
     @toilet_place.user_id = current_user.id
     
-    if @toilet_place.save!
+    if @toilet_place.save
       redirect_to root_path, notice: 'トイレの場所を登録しました'
     else
       render :new, status: :unprocessable_entity

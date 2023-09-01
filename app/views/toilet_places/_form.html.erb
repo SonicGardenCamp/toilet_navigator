@@ -1,5 +1,11 @@
 <%= simple_form_for toilet_place do |f| %>
+  <% if f.object.errors.any? %>
+    <% f.object.errors.full_messages.each do |msg| %>
+      <div class='alert alert-danger'><%= msg %></div>
+    <% end %>
+  <% end %>
   <%= f.input :name %>
   <%= f.input :address %>
   <%= f.button :submit, class: 'btn btn-primary' %>
+  <% pp f.object.errors.full_messages %>
 <% end %>
