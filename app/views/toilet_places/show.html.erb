@@ -5,10 +5,12 @@
     <hr>
   </div>
 
-  <%= simple_form_for @review, url: toilet_place_reviews_path(@toilet_place)  do |f|%>
-    <%= f.input :content, input_html: { rows: 5 } %>
-    <%= f.input :toilet_place_id, as: :hidden, input_html: { value: @toilet_place.id } %>
-    <%= f.button :submit, class: 'btn btn-primary' %>
+  <%if user_signed_in? %>
+    <%= simple_form_for @review, url: toilet_place_reviews_path(@toilet_place)  do |f|%>
+      <%= f.input :content, input_html: { rows: 5 } %>
+      <%= f.input :toilet_place_id, as: :hidden, input_html: { value: @toilet_place.id } %>
+      <%= f.button :submit, class: 'btn btn-primary' %>
+    <% end %>
   <% end %>
 
   <% @reviews.each do |review| %>
@@ -17,7 +19,7 @@
         <%= review.user.name %>
       </div>
       <%= review.content %>
-      <%  if current_user.reviews.include?(review) %>
+      <% if user_signed_in? && current_user.reviews.include?(review) %>
         <div class='d-flex ms-auto'>
           <%= link_to '編集', edit_toilet_place_review_path(review.toilet_place_id, review), class: 'btn btn-secondary me-1' %>
           <%= link_to '削除', toilet_place_review_path(review.toilet_place_id, review), data: { turbo_method: :delete, turbo_confirm: '本当に削除して良いですか？' }, class: 'btn btn-danger'  %>
