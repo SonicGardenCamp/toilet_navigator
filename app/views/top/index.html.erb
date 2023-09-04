@@ -77,6 +77,18 @@ function initMap() {
     };
     directionsService.route(request, function(result, status) {
       if (status === 'OK') {
+        google.maps.event.addListenerOnce(directionsRenderer, 'directions_changed', function() {
+          const duration = result.routes[0].legs[0].duration.text;
+          alert('Estimated travel time: ' + duration);
+
+          const steps = result.routes[0].legs[0].steps;
+          let instructions = 'Directions:\n';
+          steps.forEach((step, index) => {
+            instructions += `${index + 1}. ${step.instructions} (Distance: ${step.distance.text})\n`;
+          });
+          alert(instructions);
+        });
+
         directionsRenderer.setDirections(result);
       }
     });
