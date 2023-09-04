@@ -1,2 +1,7 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+#map {
+  width: 100%;
+  height: 100vh; /* これはビューポートの高さに対して100%の高さを指定します */
+}

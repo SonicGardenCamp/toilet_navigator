@@ -2,3 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
+
+document.addEventListener("DOMContentLoaded", function() {
+  var myTabs = new bootstrap.Tab(document.querySelector('#myTabs'))
+});
