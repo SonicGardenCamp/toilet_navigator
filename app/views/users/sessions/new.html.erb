@@ -1,29 +1,40 @@
-<div class='w-50 m-auto mt-5'>
- <h2>ログイン</h2>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email, class: 'form-label' %><br />
-      <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email" %>
-    </div>
-  
-    <div class="field">
-      <%= f.label :password, class: 'form-label' %><br />
-      <%= f.password_field :password, class: 'form-control', autocomplete: "current-password" %>
-    </div>
-  
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <ul class="nav nav-tabs" id="myTabs">
+        <li class="nav-item">
+          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1">ログイン</a>
+        </li>
+      </ul>
+      
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="field">
+              <%= f.label :email, class: 'form-label' %><br />
+              <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email" %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :password, class: 'form-label' %><br />
+              <%= f.password_field :password, class: 'form-control', autocomplete: "current-password" %>
+            </div>
+          
+            <% if devise_mapping.rememberable? %>
+              <div class="field">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+          
+            <div class="actions">
+              <%= f.submit "ログイン", class: 'btn btn-primary mt-2' %>
+            </div>
+          <% end %>
+          <%= render "users/shared/links" %>
+        </div>
       </div>
-    <% end %>
-  
-    <div class="actions">
-      <%= f.submit "ログイン", class: 'btn btn-primary mt-2' %>
     </div>
-  <% end %>
-
- <%= render "users/shared/links" %>
+    <%= render 'shared/map', toilet_places: @toilet_places %>
+  </div>
 </div>
-
-
