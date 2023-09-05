@@ -3,12 +3,19 @@
     <div class="col-3">
       <ul class="nav nav-tabs" id="myTabs">
         <li class="nav-item">
-          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1">ログイン</a>
+          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1">経路案内</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2">ログイン</a>
         </li>
       </ul>
       
       <div class="tab-content">
         <div class="tab-pane active" id="tab1">
+          <div id="routeDetails"></div>
+        </div>
+
+        <div class="tab-pane" id="tab2">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="field">
               <%= f.label :email, class: 'form-label' %><br />

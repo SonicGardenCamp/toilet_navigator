@@ -3,15 +3,22 @@
     <div class="col-3">
       <ul class="nav nav-tabs" id="myTabs">
         <li class="nav-item">
-          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1">トイレ一覧</a>
+          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1">経路案内</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2">各リンク</a>
+          <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2">トイレ一覧</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="tab3-tab" data-bs-toggle="tab" href="#tab3">各リンク</a>
         </li>
       </ul>
 
       <div class="tab-content">
         <div class="tab-pane active" id="tab1">
+          <div id="routeDetails"></div>
+        </div>
+
+        <div class="tab-pane" id="tab2">
           <% @toilet_places.each do |toilet_place| %>
             <div class="border-bottom d-flex align-items-center">
               <div>
@@ -27,7 +34,8 @@
             </div>
           <% end %>
         </div>
-        <div class="tab-pane" id="tab2">
+
+        <div class="tab-pane" id="tab3">
           <% if user_signed_in? %>
             <p><%= link_to 'トイレの場所登録', new_toilet_place_path, class: "dropdown-item"%></p>
             <p><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item"%></p>
