@@ -1,8 +1,10 @@
 class ToiletPlacesController < ApplicationController
   before_action :set_toilet_place, only: %i[show edit update destroy]
-  before_action :set_toilet_place_map, only: %i[index show create new edit]
+  before_action :set_toilet_place_map, only: %i[index show create new edit search]
 
   def index
+    @q = ToiletPlace.ransack(params[:q])
+    @results = @q.result.default_order
   end
   
   def show
@@ -42,7 +44,7 @@ class ToiletPlacesController < ApplicationController
   end
   
   private
-  
+
   def set_toilet_place
     @toilet_place = ToiletPlace.find(params[:id])
   end

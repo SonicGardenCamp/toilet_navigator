@@ -1,6 +1,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-3">
+      <%= search_form_for @q, url: toilet_places_path do |f| %>
+        <%= f.label :address_cont, '住所' %>
+        <%= f.search_field :address_cont %>
+        <br>
+        <%= f.submit '検索' %>
+      <% end %>
+
       <ul class="nav nav-tabs" id="myTabs">
         <li class="nav-item">
           <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1">経路案内</a>
@@ -19,7 +26,7 @@
         </div>
 
         <div class="tab-pane" id="tab2">
-          <% @toilet_places.each do |toilet_place| %>
+          <% @results.each do |toilet_place| %>
             <div class="border-bottom d-flex align-items-center">
               <div>
                 <%= link_to toilet_place.name, toilet_place_path(toilet_place), class: "text-reset link-underline link-underline-opacity-0"%>
