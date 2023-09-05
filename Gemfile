@@ -20,6 +20,7 @@ gem "dotenv-rails"
 gem "simple_form"
 gem "geocoder"
 gem "kaminari"
+gem 'ransack'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
