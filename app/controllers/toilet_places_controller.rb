@@ -1,6 +1,6 @@
 class ToiletPlacesController < ApplicationController
   before_action :set_toilet_place, only: %i[show edit update destroy]
-  before_action :set_toilet_place_map, only: %i[index show new edit]
+  before_action :set_toilet_place_map, only: %i[index show create new edit]
 
   def index
   end
