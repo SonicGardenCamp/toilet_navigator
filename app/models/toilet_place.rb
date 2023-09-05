@@ -18,4 +18,8 @@ class ToiletPlace < ApplicationRecord
       errors.add(:base, "正しい住所または名称を入力してください")
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(name address)
+  end
 end

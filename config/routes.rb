@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :toilet_places do
     resources :reviews, only: %i[new create edit update destroy]
   end
+
+
 end
