@@ -37,6 +37,9 @@
           <% end %>
         </div>
       </div>
+      <div class='mt-5'>
+        <%= paginate @toilet_places, window: 2 %>
+      </div>
     </div>
       <%= render 'shared/map', toilet_places: @toilet_places %>
   </div>
