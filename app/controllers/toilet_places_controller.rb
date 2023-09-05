@@ -1,5 +1,9 @@
 class ToiletPlacesController < ApplicationController
   before_action :set_toilet_place, only: %i[show edit update destroy]
+  before_action :set_toilet_place_map, only: %i[index show new edit]
+
+  def index
+  end
   
   def show
     @review  = Review.new
@@ -28,7 +32,7 @@ class ToiletPlacesController < ApplicationController
     if @toilet_place.update(toilet_place_params)
       redirect_to root_path, notice: 'トイレの場所を更新しました'
     else
-       render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
   
@@ -45,5 +49,9 @@ class ToiletPlacesController < ApplicationController
   
   def toilet_place_params
     params.require(:toilet_place).permit(:name, :address, :longitude, :latitude)
+  end
+
+  def set_toilet_place_map
+    @toilet_places = ToiletPlace.default_order
   end
 end

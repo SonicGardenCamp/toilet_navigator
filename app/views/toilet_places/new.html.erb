@@ -1,5 +1,32 @@
-<div class='w-50 mx-auto mt-3'>
-  <h1>トイレの場所登録</h1>
-  <%= render 'form', toilet_place: @toilet_place %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <ul class="nav nav-tabs" id="myTabs">
+        <li class="nav-item">
+          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1">新規登録</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2">各リンク</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+          <%= render 'form', toilet_place: @toilet_place %>
+        </div>
+        <div class="tab-pane" id="tab2">
+          <% if user_signed_in? %>
+            <p><%= link_to 'トイレの場所登録', new_toilet_place_path, class: "dropdown-item"%></p>
+            <p><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item"%></p>
+          <% else %>
+            <p><%= link_to 'アカウント登録', new_user_registration_path, class: "dropdown-item"%></p>
+            <p><%= link_to 'ログイン', new_user_session_path, class: "dropdown-item"%></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+      <%= render 'shared/map', toilet_places: @toilet_places %>
+  </div>
 </div>
+
 
