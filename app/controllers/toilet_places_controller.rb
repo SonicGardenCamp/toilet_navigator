@@ -52,6 +52,6 @@ class ToiletPlacesController < ApplicationController
   end
 
   def set_toilet_place_map
-    @toilet_places = ToiletPlace.default_order
+    @toilet_places = ToiletPlace.default_order.page(params[:page]).per(10)
   end
 end
