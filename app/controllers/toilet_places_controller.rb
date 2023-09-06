@@ -4,7 +4,7 @@ class ToiletPlacesController < ApplicationController
 
   def index
     @q = ToiletPlace.ransack(params[:q])
-    @results = @q.result.default_order
+    @results = @q.result.default_order.page(params[:page]).per(8)
   end
   
   def show

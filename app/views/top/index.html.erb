@@ -1,8 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 scrollable-sidebar">
-      <%= render 'layouts/sidebar', toilet_places: @toilet_places %>
-    </div>
-      <%= render 'shared/map', toilet_places: @toilet_places %>
+    <%= render 'layouts/sidebar', toilet_places: @toilet_places %>
+    <%= render 'shared/map', toilet_places: @toilet_places %>
   </div>
 </div>
