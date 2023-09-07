@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-3">
       <h1 class='mt-2 text-center'>トイレナビ</h1>
-      <%= search_form_for @q, url: toilet_places_path, class: 'mt-3' do |f| %>
+      <button class='js-startBtn'>🎤</button>
+      <%= search_form_for @q, url: toilet_places_path, class: 'mt-3', html: { name: 'searchForm' } do |f| %>
         <%= f.label :address_cont, '住所', class: 'form-label' %>
         <%= f.search_field :address_cont, class: 'form-control' %>
         <%= f.submit '検索', class: 'btn btn-primary btn-sm my-2' %>
