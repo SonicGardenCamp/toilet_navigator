@@ -4,6 +4,17 @@ User.create(
     password: 'password'
 )
 
+require "csv"
+
+CSV.foreach(Rails.root.join('csv/aichi.setoshi.csv'), headers: true) do |row|
+  ToiletPlace.create(
+    name: row['name'],
+    address: row['address'],
+    user_id: User.first.id
+    )
+end
+
+
 machida =
 [
     
@@ -81,8 +92,8 @@ machida =
   ["でんかのヤマグチ　修理処","忠生4-1-3"],
   ["デイサービス　みずきの家","本町田2797"],
   ["はじめの一歩","本町田2507-4　ハ16-106"],
-  ["鶴川あんしん相談室","町田市鶴川6-7-2　第103号室"],
-  ["salon de みずき","町田市木曽東3-24-15 エムアイビル１Ｆ"],
+  ["鶴川あんしん相談室","町田市鶴川6-7-2"],
+  ["salon de みずき","町田市木曽東3-24-15"],
   ["堺市民センター","町田市相原町795-1"],
   ["相原中央公園（管理棟内）","町田市相原町2018番地"],
   ["相原中央公園（作業棟側）","町田市相原町2018番地"],
@@ -205,22 +216,20 @@ machida =
   ["室内プール（健康増進温浴施設分）","町田市図師町199-1"],
   ["相原中央公園（芝生広場）","町田市相原町2018"],
   ["春日神社","町田市大蔵町2822"],
-  ["鶴川あんしん相談室","町田市鶴川6-7-2　第103号室"],
-  ["salon de みずき","町田市木曽東3-24-15 エムアイビル１階"],
+  ["鶴川あんしん相談室","町田市鶴川6-7-2"],
+  ["salon de みずき","町田市木曽東3-24-15"],
   ["㈱ベルク町田野津田店","町田市野津田町230"],
   ["ファミリーマート町田図師店","町田市図師町1896-6"],
   ["ファミリーマート南町田四丁目店","町田市南町田4-2-50"],
   ["ファミリーマート町田鶴間店","町田市南町田4-19-5"],
 
-]
-
+ ]
 machida.each do |name, address|
 	next if ToiletPlace.exists?(address: address)
 	ToiletPlace.create(name: name, address: address, user_id: User.first.id)
 end
 
-
-kiyosesi =
+kiyoseshi =
 [
 
     ["野塩地域市民センター","野塩1-322-2"],
@@ -568,10 +577,10 @@ sumidaku =
 
 ]
 
-# sumidadaku.each do |name, address|
-# 	next if ToiletPlace.exists?(address: address)
-# 	ToiletPlace.create(name: name, address: address, user_id: User.first.id)
-# end
+sumidaku.each do |name, address|
+	next if ToiletPlace.exists?(address: address)
+	ToiletPlace.create(name: name, address: address, user_id: User.first.id)
+end
 
 taitouku =
 [
@@ -1909,7 +1918,6 @@ tokyoutohinanjo =
     ["仙川公園","東京都三鷹市新川6-7-1"],
     ["東京都立井の頭恩賜公園（うち井の頭文化園、西園）","東京都三鷹市下連雀1-1、東京都武蔵野市御殿山1-17、18、19"],
     ["公団新川・島屋敷通り団地","東京都三鷹市新川4-25、新川5-6、7"],
-    ["国際基督教大学・東京神学大学・ルーテル学院大学・東京都立野川公園","東京都三鷹市大沢2-15先、大沢3-10-2、20、30、小金井市東町1-1先、1-6先、調布市野��1丁目、2丁目"],,
     ["国立天文台","東京都三鷹市大沢2-21-1"],
     ["東京都立武蔵野の森公園","東京都三鷹市大沢6-11先、府中市旭町3-7先、調布市西町先"],
     ["東京都立神代植物公園","東京都調布市深大寺元町2丁目ほか"],
@@ -2173,7 +2181,7 @@ tokyoutohinanjo =
     ["木曽中学校","東京都町田市木曽西2-4-9"],
     ["七国山小学校","東京都町田市山崎町1314-2"],
     ["山崎中学校","東京都町田市山崎町1445"],
-    ["都立山崎高校","東京都町田市山崎町1453-1"]
+    ["都立山崎高校","東京都町田市山崎町1453-1"],
     ["忠生小学校","東京都町田市忠生3-10-2"],
     ["山崎小学校","東京都町田市忠生2-15-26"],
     ["忠生中学校","東京都町田市忠生3-14-1"],
@@ -2977,7 +2985,7 @@ tokyoutohinanjo =
 
 ]
 
-sumidadaku.each do |name, address|
+tokyoutohinanjo.each do |name, address|
   next if ToiletPlace.exists?(address: address)
   ToiletPlace.create(name: name, address: address, user_id: User.first.id)
 end
