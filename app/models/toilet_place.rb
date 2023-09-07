@@ -1,6 +1,6 @@
 class ToiletPlace < ApplicationRecord
   belongs_to :user
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   
   geocoded_by :address
   before_validation :geocode, if: :address_changed?
