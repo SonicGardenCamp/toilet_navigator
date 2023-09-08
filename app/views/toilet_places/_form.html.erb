@@ -1,4 +1,4 @@
-<%= simple_form_for toilet_place do |f| %>
+<%= simple_form_for toilet_place, html: { class: 'mt-3' } do |f| %>
   <% if f.object.errors.any? %>
     <% f.object.errors.full_messages.each do |msg| %>
       <div class='alert alert-danger'><%= msg %></div>

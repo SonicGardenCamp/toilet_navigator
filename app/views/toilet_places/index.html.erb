@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 scrollable-sidebar">
+    <div class="col-md-3 col-12 scrollable-sidebar">
       <%= render 'shared/title' %>
       <button class='js-startBtn'>🎤</button>
       <%= search_form_for @q, url: toilet_places_path, class: 'mt-3', html: { name: 'searchForm' } do |f| %>
@@ -29,7 +29,7 @@
         <div class="tab-pane" id="tab2">
           <% @results.each do |toilet_place| %>
             <div class="border-bottom d-flex align-items-center">
-              <div>
+              <div class='py-2'>
                 <%= link_to toilet_place.name, toilet_place_path(toilet_place), data: { 'turbo': 'false' }%>
                 <p><%= toilet_place.address %></p>
               </div>
@@ -49,13 +49,13 @@
         <div class="tab-pane" id="tab3">
           <% if user_signed_in? %>
             <ul class='p-4 ms-4'>
-              <li><%= link_to 'トイレの場所登録', new_toilet_place_path %></li>
-              <li><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete } %></li>
+              <li class='mb-3'><%= link_to 'トイレの場所登録', new_toilet_place_path %></li>
+              <li class='mb-3'><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete } %></li>
             </ul>
           <% else %>
             <ul class='p-4 ms-4'>
-              <li><%= link_to 'アカウント登録', new_user_registration_path, class: "mb-2"%></li>
-              <li><%= link_to 'ログイン', new_user_session_path, class: "mb-2"%></li>
+              <li class='mb-3'><%= link_to 'アカウント登録', new_user_registration_path, class: "mb-2"%></li>
+              <li class='mb-3'><%= link_to 'ログイン', new_user_session_path, class: "mb-2"%></li>
             </ul>
           <% end %>
         </div>
