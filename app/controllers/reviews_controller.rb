@@ -2,11 +2,11 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %i[edit update destroy]
   
   def create
-    review = current_user.reviews.build(review_params)
-    if review.save
-      redirect_to toilet_place_path(review.toilet_place.id), notice: 'レビューを投稿しました'
+    @review = current_user.reviews.build(review_params)
+    if @review.save
+      redirect_to toilet_place_path(@review.toilet_place.id), notice: 'レビューを投稿しました'
     else
-      redirect_to toilet_place_path(review.toilet_place.id), alert: 'レビューを投稿に失敗しました。'
+      redirect_to toilet_place_path(@review.toilet_place.id), alert: 'レビューを投稿に失敗しました。'
     end
   end
   

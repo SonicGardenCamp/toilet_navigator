@@ -9,7 +9,7 @@ class ToiletPlacesController < ApplicationController
   
   def show
     @review  = Review.new
-    @reviews = Review.default_order
+    @reviews = @toilet_place.reviews.default_order
   end
   
   def new
