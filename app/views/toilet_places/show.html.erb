@@ -44,7 +44,7 @@
                 </div>
               <% if user_signed_in? && current_user.reviews.include?(review) %>
                 <div class='ms-auto flex-shrink-0 mt-auto'>
-                  <%= link_to '編集', edit_toilet_place_review_path(review.toilet_place_id, review), class: 'btn btn-secondary btn-sm me-1' %>
+                  <!--<%= link_to '編集', edit_toilet_place_review_path(review.toilet_place_id, review), class: 'btn btn-secondary btn-sm me-1' %>-->
                   <%= link_to '削除', toilet_place_review_path(review.toilet_place_id, review), data: { turbo_method: :delete, turbo_confirm: '本当に削除して良いですか？' }, class: 'btn btn-danger btn-sm'  %>
                 </div>
               <% end %>
