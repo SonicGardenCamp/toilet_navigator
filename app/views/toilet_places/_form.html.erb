@@ -1,0 +1,11 @@
+<%= simple_form_for toilet_place, html: { class: 'mt-3' } do |f| %>
+  <% if f.object.errors.any? %>
+    <% f.object.errors.full_messages.each do |msg| %>
+      <div class='alert alert-danger'><%= msg %></div>
+    <% end %>
+  <% end %>
+
+  <%= f.input :name %>
+  <%= f.input :address, placeholder: '土地名または、住所を入力してください' %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+<% end %>
